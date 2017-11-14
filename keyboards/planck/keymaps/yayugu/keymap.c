@@ -178,6 +178,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   float plover_gb_song[][2]  = SONG(PLOVER_GOODBYE_SOUND);
 #endif
 
+int last_keycode = 0;
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case QWERTY:
@@ -203,9 +205,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
         layer_on(_LOWER);
         update_tri_layer(_LOWER, _RAISE, _ADJUST);
+        last_keycode = keycode;
       } else {
         layer_off(_LOWER);
         update_tri_layer(_LOWER, _RAISE, _ADJUST);
+        if (last_keycode == keycode) {
+          SEND_STRING(SS_TAP(X_LGUI));
+        }
       }
       return false;
       break;
@@ -213,9 +219,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
         layer_on(_RAISE);
         update_tri_layer(_LOWER, _RAISE, _ADJUST);
+        last_keycode = keycode;
       } else {
         layer_off(_RAISE);
         update_tri_layer(_LOWER, _RAISE, _ADJUST);
+        if (last_keycode == keycode) {
+          SEND_STRING(SS_TAP(X_RGUI));
+        }
       }
       return false;
       break;
@@ -259,5 +269,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return false;
       break;
   }
+  last_keycode = keycode;
   return true;
 }
