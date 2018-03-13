@@ -4,6 +4,7 @@
 #include "config.h"
 #include <stdbool.h>
 
+
 /* TODO:  some defines for interrupt setup */
 #define SERIAL_PIN_DDR DDRD
 #define SERIAL_PIN_PORT PORTD
@@ -21,7 +22,7 @@
 #ifdef KEYBOARD_helix_rev1
 #define SERIAL_MASTER_BUFFER_LENGTH 1
 #else
-#define SERIAL_MASTER_BUFFER_LENGTH MATRIX_ROWS/2
+#define SERIAL_MASTER_BUFFER_LENGTH ((MATRIX_ROWS/2 + 2))
 #endif
 
 // Buffers for master - slave communication

@@ -11,12 +11,13 @@
 #include <util/delay.h>
 #include <stdbool.h>
 #include "serial.h"
+#include "rgblight_types.h"
 
 #ifdef USE_SERIAL
 
 // Serial pulse period in microseconds. Its probably a bad idea to lower this
 // value.
-#define SERIAL_DELAY 32
+#define SERIAL_DELAY 64
 
 uint8_t volatile serial_slave_buffer[SERIAL_SLAVE_BUFFER_LENGTH] = {0};
 uint8_t volatile serial_master_buffer[SERIAL_MASTER_BUFFER_LENGTH] = {0};
@@ -160,10 +161,11 @@ ISR(SERIAL_PIN_INTERRUPT) {
 
   serial_input(); // end transaction
 
-  if ( checksum_computed != checksum_received ) {
+  if ( checksum_computed != checksum_received ) {a
     status |= SLAVE_DATA_CORRUPT;
   } else {
     status &= ~SLAVE_DATA_CORRUPT;
+    rgblight_effect_rainbow_mood_hue = serial_master_buffer[SERIAL_MASTER_BUFFER_LENGTH - 2];
   }
 }
 
@@ -218,6 +220,7 @@ int serial_update_buffers(void) {
   }
 
   uint8_t checksum = 0;
+  serial_master_buffer[SERIAL_MASTER_BUFFER_LENGTH - 2] = rgblight_effect_rainbow_mood_hue;
   // send data to the slave
   for (int i = 0; i < SERIAL_MASTER_BUFFER_LENGTH; ++i) {
     serial_write_byte(serial_master_buffer[i]);

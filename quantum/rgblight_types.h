@@ -42,4 +42,6 @@
 struct cRGB  { uint8_t g; uint8_t r; uint8_t b; };
 struct cRGBW { uint8_t g; uint8_t r; uint8_t b; uint8_t w;};
 
+extern uint16_t rgblight_effect_rainbow_mood_hue;
+
 #endif

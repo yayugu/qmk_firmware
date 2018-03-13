@@ -43,6 +43,8 @@ LED_TYPE led[RGBLED_NUM];
 uint8_t rgblight_inited = 0;
 bool rgblight_timer_enabled = false;
 
+uint16_t rgblight_effect_rainbow_mood_hue = 0;
+
 void sethsv(uint16_t hue, uint8_t sat, uint8_t val, LED_TYPE *led1) {
   uint8_t r = 0, g = 0, b = 0, base, color;
 
@@ -522,15 +524,16 @@ void rgblight_effect_breathing(uint8_t interval) {
   pos = (pos + 1) % 256;
 }
 void rgblight_effect_rainbow_mood(uint8_t interval) {
-  static uint16_t current_hue = 0;
   static uint16_t last_timer = 0;
+  static uint16_t last_hue = 0;
 
-  if (timer_elapsed(last_timer) < pgm_read_byte(&RGBLED_RAINBOW_MOOD_INTERVALS[interval])) {
+  if (last_hue == rgblight_effect_rainbow_mood_hue &&
+    timer_elapsed(last_timer) < pgm_read_byte(&RGBLED_RAINBOW_MOOD_INTERVALS[interval])) {
     return;
   }
   last_timer = timer_read();
-  rgblight_sethsv_noeeprom(current_hue, rgblight_config.sat, rgblight_config.val);
-  current_hue = (current_hue + 1) % 360;
+  rgblight_sethsv_noeeprom(rgblight_effect_rainbow_mood_hue, rgblight_config.sat, rgblight_config.val);
+  last_hue = rgblight_effect_rainbow_mood_hue = (rgblight_effect_rainbow_mood_hue + 1) % 360;
 }
 void rgblight_effect_rainbow_swirl(uint8_t interval) {
   static uint16_t current_hue = 0;
