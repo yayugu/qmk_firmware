@@ -10,6 +10,7 @@ extern keymap_config_t keymap_config;
 // entirely and just use numbers.
 #define _QWERTY 0
 #define _FN   1
+#define _FN2   2
 
 // Fillers to make layering more clear
 #define _______ KC_TRNS
@@ -22,7 +23,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    KC_TAB,    KC_Q,    KC_W,    KC_E,   KC_R,   KC_T,
    KC_LCTRL,  KC_A,    KC_S,    KC_D,   KC_F,   KC_G,
    KC_LSHIFT, KC_Z,    KC_X,    KC_C,   KC_V,   KC_B,
-                       LGUI(KC_TAB),  KC_BSLS,
+                       KC_TAB,  KC_BSLS,
                                KC_LGUI,  KC_SPC,
                                KC_ESC,   KC_ENTER,
                                MO(_FN),  KC_LALT,
@@ -54,11 +55,44 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, _______,
         _______, _______,
         _______, _______),
+[_FN2] = KEYMAP_5x6_7(
+  // left hand
+   _______,  _______,  _______,  _______,  _______,  _______,
+   _______,  _______,  _______,  _______,  _______,  _______,
+   _______,  _______,  _______,  _______,  _______,  _______,
+   _______,  _______,  _______,  _______,  _______,  _______,
+                       _______,  _______,
+                               _______, _______,
+                               _______, _______,
+                               _______, _______,
+        // right hand
+                     _______, _______, _______, _______,  _______, _______, _______,
+                     _______, _______, _______, _______,  _______, _______, _______,
+                     _______, _______, _______, _______,  _______, _______, _______,
+                     _______, _______, _______, _______,  _______, _______, _______,
+                                       _______, _______,
+        _______, KC_TAB,
+        _______, _______,
+        _______, _______),
 };
-
-
 
 void persistant_default_layer_set(uint16_t default_layer) {
   eeconfig_update_default_layer(default_layer);
   default_layer_set(default_layer);
+}
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case KC_LGUI:
+      if (record->event.pressed) {
+        // Do something when pressed
+        layer_on(_FN2);
+      } else {
+        // Do something else when release
+        layer_off(_FN2);
+      }
+      return true; // Let QMK send the enter press/release events
+    default:
+      return true; // Process all other keycodes normally
+  }
 }
