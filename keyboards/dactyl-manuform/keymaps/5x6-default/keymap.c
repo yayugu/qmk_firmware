@@ -25,16 +25,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    KC_LSHIFT, KC_Z,    KC_X,    KC_C,   KC_V,   KC_B,
                        KC_TAB,  KC_BSLS,
                                KC_LGUI,  KC_SPC,
-                               KC_ESC,   KC_ENTER,
+                               KC_ESC,   LCTL(KC_SPC), // Ctrl + Space
                                MO(_FN),  KC_LALT,
         // right hand
                      KC_6,    KC_7,   KC_8,    KC_9,    KC_0,    KC_MINS,   KC_EQL,
                      KC_Y,    KC_U,   KC_I,    KC_O,    KC_P,    KC_LBRC,   KC_RBRC,
                      KC_H,    KC_J,   KC_K,    KC_L,    KC_SCLN, KC_QUOT,   KC_BSLS,
-                     KC_N,    KC_M,   KC_COMM, KC_DOT,  KC_SLSH, KC_GRV,    KC_QUOT,
+                     KC_N,    KC_M,   KC_COMM, KC_DOT,  KC_SLSH, KC_GRV,    KC_RSHIFT,
                                       KC_BSPC, KC_ENTER,
         KC_ENTER,KC_RGUI,
-        KC_BSPC, KC_ENTER,
+        KC_BSPC, KC_LCTRL,
         KC_RALT, MO(_FN)),
 [_FN] = KEYMAP_5x6_7(
   // left hand
@@ -48,7 +48,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                _______, _______,
         // right hand
                      KC_F6,    KC_F7,    KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
-                     _______, _______, _______, _______,  _______, _______, _______,
+                     _______, SGUI(KC_LBRC), SGUI(KC_RBRC), _______,  _______, _______, _______,  // LGUI + Shift + { / }
                      KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, _______, _______, _______,
                      _______, _______, _______, _______,  _______,   RESET, _______,
                                        _______, _______,
