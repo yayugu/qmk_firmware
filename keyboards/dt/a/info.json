@@ -1,17 +1,12 @@
 {
-  "keyboard_name": "Helix rev3 4rows",
-  "manufacturer": "yushakobo",
+  "keyboard_name": "Dactyl-Manuform keyboard",
+  "manufacturer": "Mystery",
   "url": "",
-  "maintainer": "yushakobo",
+  "maintainer": "Mystery",
   "usb": {
-    "vid": "0x3265",
-    "pid": "0x0004",
+    "vid": "0xFEED",
+    "pid": "0x3060",
     "device_version": "0.0.1"
-  },
-  "encoder": {
-    "rotary": [
-      {"pin_a": "B6", "pin_b": "B5"}
-    ]
   },
   "split": {
     "soft_serial_pin": "D2"
