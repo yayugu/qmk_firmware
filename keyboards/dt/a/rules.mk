@@ -1,0 +1,8 @@
+EXTRAKEY_ENABLE = yes    # Audio control and System control
+RGBLIGHT_ENABLE = no
+SPLIT_KEYBOARD = yes
+RGB_MATRIX_ENABLE = no
+OLED_ENABLE = no
+ENCODER_ENABLE = no
+DIP_SWITCH_ENABLE = no
+LTO_ENABLE = yes
