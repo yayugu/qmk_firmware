@@ -17,6 +17,3 @@
 #pragma once
 
 #include "quantum.h"
-
-bool is_mac_mode(void);
-void set_mac_mode(bool macmode);

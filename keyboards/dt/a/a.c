@@ -16,16 +16,17 @@
 
 #include "a.h"
 
-bool is_mac_mode(void) {
-    return keymap_config.swap_lalt_lgui == false;
-}
-
-void set_mac_mode(bool macmode) {
-    /* The result is the same as pressing the AG_NORM(=MAGIC_UNSWAP_ALT_GUI)/AG_SWAP(=MAGIC_SWAP_ALT_GUI) keys.
-     * see
-     *   https://github.com/qmk/qmk_firmware/blob/fb4a6ad30ea7a648acd59793ed4a30c3a8d8dc32/quantum/process_keycode/process_magic.c#L123-L124
-     *   https://github.com/qmk/qmk_firmware/blob/fb4a6ad30ea7a648acd59793ed4a30c3a8d8dc32/quantum/process_keycode/process_magic.c#L80-L81
-     */
-    keymap_config.swap_lalt_lgui = keymap_config.swap_ralt_rgui = !macmode;
-    eeconfig_update_keymap(keymap_config.raw);
-}
+const matrix_row_t matrix_mask[MATRIX_ROWS] = {
+    0b01111110,
+    0b01111110,
+    0b01111110,
+    0b01111110,
+    0b01111000,
+    0b01111000,
+    0b01111111,
+    0b01111111,
+    0b01111111,
+    0b01111111,
+    0b01111000,
+    0b01111000,
+};
