@@ -14,5 +14,3 @@ AUDIO_ENABLE = no       # Audio output
 RGBLIGHT_ENABLE = no    # Enable WS2812 RGB underlight.
 
 DEFAULT_FOLDER = dt/a
-
-HELIX_TOP_DIR := $(patsubst %/,%,$(dir $(lastword $(MAKEFILE_LIST))))
