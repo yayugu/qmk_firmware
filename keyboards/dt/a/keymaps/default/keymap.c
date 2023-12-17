@@ -21,6 +21,7 @@
 enum layer_names {
   _QWERTY = 0,
   _FN,
+  _GAME,
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -39,7 +40,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                         KC_Y,    KC_U,   KC_I,    KC_O,    KC_P,    KC_LBRC,   KC_RBRC,
                         KC_H,    KC_J,   KC_K,    KC_L,    KC_SCLN, KC_QUOT,   KC_BSLS,
                         KC_N,    KC_M,   KC_COMM, KC_DOT,  KC_SLSH, KC_GRV,    KC_RSFT,
-                                        KC_BSPC, KC_ENTER,
+                                         KC_BSPC, KC_ENTER,
             KC_ENTER,KC_RGUI,
             KC_BSPC, KC_RCTL,
             KC_RALT, MO(_FN)),
@@ -58,8 +59,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                         _______, SGUI(KC_LBRC), SGUI(KC_RBRC), _______,  _______, _______, _______,  // LGUI + Shift + { / }
                         KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, _______, _______, _______,
                         _______, _______, _______, _______,  _______, _______, _______,
-                                        _______, _______,
+                                          TG(_GAME), _______,
             _______, _______,
             _______, _______,
             _______, _______),
+    [_GAME] = LAYOUT(
+    // left hand
+    _______,  KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,
+    _______,  _______,  _______,     KC_W,  _______, _______,
+    _______,  _______,     KC_A,     KC_S,     KC_D, _______,
+    _______,  _______,  _______,  _______,  _______, _______,
+                        _______,  _______,
+                                KC_LGUI,  KC_SPC,
+                                KC_ESC,   LCTL(KC_SPC), // Ctrl + Space
+                                MO(_FN),  KC_LALT,
+            // right hand
+                        KC_F6,    KC_F7,    KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
+                        _______, _______, _______, _______,  _______, _______, _______,
+                        KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, _______, _______, _______,
+                        _______, _______, _______, _______,  _______, _______, _______,
+                                          _______, _______,
+            KC_ENTER,KC_RGUI,
+            KC_BSPC, KC_RCTL,
+            KC_RALT, MO(_FN)),
 };
